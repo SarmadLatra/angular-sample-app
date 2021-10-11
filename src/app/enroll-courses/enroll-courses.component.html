@@ -1,0 +1,79 @@
+<!-- <div class="container-fluid">  
+    <h3>  
+      Course Enrollment  
+    </h3>  
+<form #courseForm = 'ngForm' (ngSubmit)="submitForm(courseForm.value)">
+<div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" #name ='ngModel' ngModel required
+           [(ngModel)]="model.name" name="name">
+
+  </div>
+  
+  <div class="form-group">
+    <label for="desc">Description</label>
+    <input type="text"  class="form-control" id="desc"
+           [(ngModel)]="model.desc" name="desc">
+  </div>
+  
+  <div class="form-group">
+    <label for="instructor">instructor</label>
+    <input type="text"  class="form-control" id="instructor"
+           [(ngModel)]="model.instructor" name="instructor">
+  </div>
+
+  <div class="form-group">
+    <label for="instructor_email">Instructor Email</label>
+    <input type="instructor_email"  class="form-control" id="instructor_email"
+           [(ngModel)]="model.instructor_email" name="instructor_email">
+  </div>
+  <button type="submit" class="btn btn-success">submit</button>
+</form> -->
+<form  [formGroup]="courseForm" novalidate>
+    <div class="form-group">
+        <label> Name</label> <span class="text-danger"> *</span>
+        <input type="text" maxlength="50" class="form-control"
+           name="name" formControlName="name"
+          required />
+        <span *ngIf="courseForm.controls.name.errors?.required &&  courseForm.controls.name.touched"
+        style="color: red;">
+          Invalid Name
+        </span>
+        <span *ngIf="courseForm.controls.name.errors?.pattern &&  courseForm.controls.name.touched"
+        style="color: red;">
+          Invalid Nme
+        </span>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input type="text" maxlength="50" name="desc" class="form-control" formControlName="desc" required>
+        <span *ngIf="courseForm.controls.desc.errors?.required && courseForm.controls.desc.touched"
+        style="color: red;">
+Invalid Description
+        </span>
+      </div>
+    <div class="form-group ">
+        <label>Instructor</label> <span class="text-danger"> *</span>
+        <input type="text" name="instructor" formControlName="instructor" class="form-control" required>
+        <span *ngIf="courseForm.controls.instructor.errors?.required &&  courseForm.controls.instructor.touched"
+           style="color: red;">
+          Invalid instructor          </span>
+        <span *ngIf="courseForm.controls.instructor.invalid && !courseForm.controls.instructor.errors?.required"
+        style="color: red;">
+          Invalid instructor          </span>
+    </div>
+    <div class="form-group ">
+        <label>Instructor Email</label> <span class="text-danger"> *</span>
+        <input type="text" name="instructor_email" class="form-control" formControlName="instructor_email" required>
+        <span *ngIf="courseForm.controls.instructor_email.errors?.required &&  courseForm.controls.instructor_email.touched"
+        style="color: red;">
+       Invalid instructor          </span>
+        <span *ngIf="courseForm.controls.instructor_email.errors?.touched && !courseForm.controls.instructor_email.errors?.pattern"
+        style="color: red;">
+          Invalid Email          </span>
+    </div>
+    <button type="submit" class="btn btn-primary" style="text-align: center;"  (click)='submitForm()'>Submit</button>
+  </form>
+  <div class="alert alert-success" *ngIf = 'statusMessage'>
+    <strong>Success!</strong> {{statusMessage}}.
+  </div>

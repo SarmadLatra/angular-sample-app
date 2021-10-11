@@ -1,0 +1,22 @@
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Course Details</h4>
+      </div>
+      <div class="modal-body" *ngIf="course">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-primary">{{course.name}}</li>
+            <li class="list-group-item list-group-item-secondary">{{course.desc}}</li>
+            <li class="list-group-item list-group-item-success">{{course.instructor}}</li>
+            <li class="list-group-item list-group-item-danger">{{course.instructor_email}}</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
