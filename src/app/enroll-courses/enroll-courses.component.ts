@@ -25,7 +25,13 @@ export class EnrollCoursesComponent implements OnInit {
   ) {}
   submitForm() {
     debugger;
-    if (this.courseForm.invalid) return;
+    if (this.courseForm.invalid) {
+      this.statusMessage = 'Data Incorrect';
+      setTimeout(() => {
+        this.statusMessage = '';
+      }, 3000);
+      return;
+    }
     this.model.name = this.courseForm.value?.name;
     this.model.desc = this.courseForm.value?.desc;
     this.model.instructor = this.courseForm.value?.instructor;
@@ -41,15 +47,10 @@ export class EnrollCoursesComponent implements OnInit {
   private bindForm() {
     this.courseForm = this.formBuilder.group({
       id: [0],
-      name: [null],
-      desc: [null],
-      instructor: [null],
-      instructor_email: [
-        null,
-        Validators.compose([
-          Validators.pattern(this.validationService.regUserEmail),
-        ]),
-      ],
+      name: [null, Validators.required],
+      desc: [null, Validators.required],
+      instructor: [null, Validators.required],
+      instructor_email: [null, [Validators.required, Validators.email]],
     });
   }
 

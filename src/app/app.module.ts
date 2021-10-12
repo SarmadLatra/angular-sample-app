@@ -14,6 +14,7 @@ import { LocationsComponent } from './locations/locations.component';
 import { EnrollCoursesComponent } from './enroll-courses/enroll-courses.component';
 import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,

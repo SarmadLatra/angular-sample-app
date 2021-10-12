@@ -34,7 +34,7 @@
         <label> Name</label> <span class="text-danger"> *</span>
         <input type="text" maxlength="50" class="form-control"
            name="name" formControlName="name"
-          required />
+           />
         <span *ngIf="courseForm.controls.name.errors?.required &&  courseForm.controls.name.touched"
         style="color: red;">
           Invalid Name
@@ -46,7 +46,7 @@
     </div>
     <div class="form-group">
         <label>Description</label>
-        <input type="text" maxlength="50" name="desc" class="form-control" formControlName="desc" required>
+        <input type="text" maxlength="50" name="desc" class="form-control" formControlName="desc">
         <span *ngIf="courseForm.controls.desc.errors?.required && courseForm.controls.desc.touched"
         style="color: red;">
 Invalid Description
@@ -54,7 +54,7 @@ Invalid Description
       </div>
     <div class="form-group ">
         <label>Instructor</label> <span class="text-danger"> *</span>
-        <input type="text" name="instructor" formControlName="instructor" class="form-control" required>
+        <input type="text" name="instructor" formControlName="instructor" class="form-control">
         <span *ngIf="courseForm.controls.instructor.errors?.required &&  courseForm.controls.instructor.touched"
            style="color: red;">
           Invalid instructor          </span>
@@ -64,16 +64,21 @@ Invalid Description
     </div>
     <div class="form-group ">
         <label>Instructor Email</label> <span class="text-danger"> *</span>
-        <input type="text" name="instructor_email" class="form-control" formControlName="instructor_email" required>
-        <span *ngIf="courseForm.controls.instructor_email.errors?.required &&  courseForm.controls.instructor_email.touched"
-        style="color: red;">
-       Invalid instructor          </span>
-        <span *ngIf="courseForm.controls.instructor_email.errors?.touched && !courseForm.controls.instructor_email.errors?.pattern"
-        style="color: red;">
-          Invalid Email          </span>
+        <input type="text" name="instructor_email" class="form-control" formControlName="instructor_email">
+       <div *ngIf = '(courseForm.controls.instructor_email.invalid && courseForm.controls.instructor_email.touched) || courseForm.controls.instructor_email.dirty'>
+        <span *ngIf="courseForm.controls.instructor_email.errors?.required"
+        class='text-danger'>
+       instructor Email Required       </span>
+        <span *ngIf="courseForm.controls.instructor_email.errors?.email"
+        class='text-danger'>
+          Email Incorrect          </span>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary" style="text-align: center;"  (click)='submitForm()'>Submit</button>
+    <button [disabled]='courseForm.invalid' type="submit" class="btn btn-primary" style="text-align: center;"  (click)='submitForm()'>Submit</button>
   </form>
-  <div class="alert alert-success" *ngIf = 'statusMessage'>
+  <div class="alert alert-success" *ngIf = 'statusMessage==="Saved Successfully"'>
     <strong>Success!</strong> {{statusMessage}}.
+  </div>
+  <div class="alert alert-danger" *ngIf = 'statusMessage === "Data Incorrect"'>
+    <strong>Failure!</strong> {{statusMessage}}.
   </div>
